@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>2.1</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <script src="ext/jquery.js"></script>
+    <script src="ext/jquery.csv.js"></script>
+    <script src="ext/jquery.flot.js"></script>
+    <script src="ext/jquery.flot.time.js"></script>
+    <script src="ext/jquery.flot.resize.js"></script>
+    <script src="ext/jquery.flot.axislabels.js"></script>
+    <script src="ext/jquery.flot.hiddengraphs.js"></script>
+    <script src="ext/jquery.flot.tooltip.js"></script>
+    <script src="ext/moment.js"></script>
+
+    <link rel="stylesheet" href="css/chart.css" />
+    <script src="js/chart.js"></script>
+    <script src="js/stories.js"></script>
+
+    <script>
+      $(document).ready(function () {
+        $.get('http://localhost:9999/data/histProg.csv').done(function (data) {
+          let csv = $.csv.toObjects(data, {
+            separator: ';'
+          });
+          story._2_1(csv, 'tstamp', 'mix_gasCon',
+                  ["1_89312", "2_89077", "3_72764", "4_89077", "5_89077"],
+                  ["Lager 1", "Lager 2", "Lager 3", "Lager 4", "Lager 5"]);
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div id="chart" style="width:inherit;height:90%;"></div>
+    <div id="footer">
+      Copyright &copy; 2018 infinIT Services GmbH
+    </div>
+  </body>
+</html>

@@ -1,0 +1,5 @@
+/nbproject/
+/node_modules/
+/public_html/data/
+/public_html/ext/
+/yarn.lock

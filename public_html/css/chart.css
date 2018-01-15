@@ -1,0 +1,48 @@
+html, body {
+  height: 100%; /* make the percentage height on 'chart' element work */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.flotTip { /* requires option => defaultTheme: false */
+  padding: 1px 2px;
+  background-color: #000;
+  z-index: 100;
+  color: #fff;
+  box-shadow: 0 0 10px #555;
+  opacity: .6;
+  filter: alpha(opacity=60);
+  border: 1px solid #fff;
+  -webkit-border-radius: 1px;
+  -moz-border-radius: 1px;
+  border-radius: 1px;
+}
+
+fieldset {
+  border: 0;
+}
+
+label {
+  display: block;
+  margin: 30px 0 0 0;
+}
+
+.overflow {
+  height: 200px;
+}
+
+.axisLabels, .yaxisLabel {
+  font-size: 14px;
+  font-family: sans-serif;
+}
+
+#footer {
+  margin-top: 25px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-size: 12px;
+  color: #999;
+}
