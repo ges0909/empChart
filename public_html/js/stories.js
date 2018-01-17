@@ -41,11 +41,12 @@ story._1_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   csv = csv.filter(line => line['Typ'] !== 'Prognose');
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
   let self = this;
-  keys.forEach(function (lagerid) {
-    series[lagerid] = self.extract(groups[lagerid], xcolumn, ycolumn, 'YYYY-MM-DD');
-    options = self.minmax(series[lagerid], options);
+  sites.forEach(function (site) {
+    series[site] = self.extract(groups[site], xcolumn, ycolumn, 'YYYY-MM-DD');
+    options = self.minmax(series[site], options);
   });
 
   // right margin
@@ -74,7 +75,7 @@ story._1_4 = function (csv, xcolumn, ycolumn, keys, labels) {
     xaxis: {
       mode: 'time',
       minTickSize: [1, "month"],
-//      timeformat: "%b",
+      timeformat: "%b",
       monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
       min: 0,
       max: 0
@@ -99,13 +100,14 @@ story._1_4 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
-  let centershift = keys.length * options.bars.barWidth / 2;
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
+  let centershift = sites.length * options.bars.barWidth / 2;
   let self = this;
-  keys.forEach(function (lagerid, index) {
-    let points = self.extract(groups[lagerid], xcolumn, ycolumn, 'MMM');
+  sites.forEach(function (site, index) {
+    let points = self.extract(groups[site], xcolumn, ycolumn, 'MMM');
     // left shift o x-axis to center all series bars of a month
-    series[lagerid] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
+    series[site] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
     options = self.minmax(points, options);
   });
 
@@ -147,7 +149,7 @@ story._1_5 = function (csv, xcolumn, ycolumn, keys, labels) {
     xaxis: {
       mode: 'time',
       minTickSize: [1, "month"],
-//      timeformat: "%b",
+      timeformat: "%b",
       monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
       min: 0,
       max: 0
@@ -172,13 +174,14 @@ story._1_5 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
-  let centershift = keys.length * options.bars.barWidth / 2;
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
+  let centershift = sites.length * options.bars.barWidth / 2;
   let self = this;
-  keys.forEach(function (lagerid, index) {
-    let points = self.extract(groups[lagerid], xcolumn, ycolumn, 'MMM');
+  sites.forEach(function (site, index) {
+    let points = self.extract(groups[site], xcolumn, ycolumn, 'MMM');
     // left shift o x-axis to center all series bars of a month
-    series[lagerid] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
+    series[site] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
     options = self.minmax(points, options);
   });
 
@@ -220,7 +223,7 @@ story._1_6 = function (csv, xcolumn, ycolumn, keys, labels) {
     xaxis: {
       mode: 'time',
       minTickSize: [1, "month"],
-//      timeformat: "%b",
+      timeformat: "%b",
       monthNames: ['Jan', 'Feb', 'Mar', 'Apr', 'Mai', 'Jun', 'Jul', 'Aug', 'Sep', 'Okt', 'Nov', 'Dez'],
       min: 0,
       max: 0
@@ -245,13 +248,14 @@ story._1_6 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
-  let centershift = keys.length * options.bars.barWidth / 2;
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
+  let centershift = sites.length * options.bars.barWidth / 2;
   let self = this;
-  keys.forEach(function (lagerid, index) {
-    let points = self.extract(groups[lagerid], xcolumn, ycolumn, 'MMM');
+  sites.forEach(function (site, index) {
+    let points = self.extract(groups[site], xcolumn, ycolumn, 'MMM');
     // left shift o x-axis to center all series bars of a month
-    series[lagerid] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
+    series[site] = points.map(xy => [xy[0] + (index * options.bars.barWidth) - centershift, xy[1]]);
     options = self.minmax(points, options);
   });
 
@@ -314,11 +318,12 @@ story._1_6_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
   let self = this;
-  keys.forEach(function (lagerid, index) {
-    series[lagerid] = self.extract(groups[lagerid], xcolumn, ycolumn, 'MMM');
-    options = self.minmax(series[lagerid], options);
+  sites.forEach(function (site, index) {
+    series[site] = self.extract(groups[site], xcolumn, ycolumn, 'MMM');
+    options = self.minmax(series[site], options);
   });
 
   // left and right margin
@@ -369,15 +374,16 @@ story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
 
   let segments = {};
   let changedLabels = [];
-  let groups = this.groupBy('LagerID', csv);
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
   let self = this;
-  keys.forEach(function (lagerid, index) {
-    let types = self.groupBy('Typ', groups[lagerid]);
+  sites.forEach(function (site, index) {
+    let types = self.groupBy('Typ', groups[site]);
     for (let type in types) {
-      segments[lagerid + type] = self.extract(types[type], xcolumn, ycolumn, 'YYYY-MM-DD');
+      segments[site + type] = self.extract(types[type], xcolumn, ycolumn, 'YYYY-MM-DD');
       changedLabels.push(labels[index] + ' - ' + type)
     }
-    let series = self.extract(groups[lagerid], xcolumn, ycolumn, 'YYYY-MM-DD');
+    let series = self.extract(groups[site], xcolumn, ycolumn, 'YYYY-MM-DD');
     options = self.minmax(series, options);
   });
 
@@ -431,11 +437,12 @@ story._2_2 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let series = {};
-  let groups = this.groupBy('LagerID', csv);
-  series['gasConCum'] = this.extract(groups[keys[0]], xcolumn, 'gasConCum', 'YYYY-MM-DD');
-  series['gasPredCum'] = this.extract(groups[keys[0]], xcolumn, 'gasPredCum', 'YYYY-MM-DD');
-  series['gasPredFac2Cum'] = this.extract(groups[keys[0]], xcolumn, 'gasPredFac2Cum', 'YYYY-MM-DD');
-  series['gasPredFac3CutCum'] = this.extract(groups[keys[0]], xcolumn, 'gasPredFac3CutCum', 'YYYY-MM-DD');
+  let groups = this.groupBy('Standort', csv);
+  let sites = Object.keys(groups);
+  series['gasConCum'] = this.extract(groups[sites[0]], xcolumn, 'gasConCum', 'YYYY-MM-DD');
+  series['gasPredCum'] = this.extract(groups[sites[0]], xcolumn, 'gasPredCum', 'YYYY-MM-DD');
+  series['gasPredFac2Cum'] = this.extract(groups[sites[0]], xcolumn, 'gasPredFac2Cum', 'YYYY-MM-DD');
+  series['gasPredFac3CutCum'] = this.extract(groups[sites[0]], xcolumn, 'gasPredFac3CutCum', 'YYYY-MM-DD');
 
   this.plot(series, options, labels, hidden, []);
 
