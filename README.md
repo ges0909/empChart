@@ -30,4 +30,4 @@
 # http-server
 
 1. npm install --globally http-server 
-2. http-server -p 9999
+2. http-server public_html -p 9999

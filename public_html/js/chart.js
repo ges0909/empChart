@@ -2,11 +2,8 @@
 
 var chart = {
 
-  options: [],
-  dataset: [],
-  hidden: [],
+  plot: null,
 
-//extract: function (csv, xColumn, yColumn, dateTimeFormat) {
   extract(csv, xColumn, yColumn, dateTimeFormat) {
     let series = [];
     csv.forEach(line => {
@@ -19,10 +16,6 @@ var chart = {
     return series;
   },
 
-  /*
-   * Groups CSV lines by the specified column.
-   */
-//groupBy: function (byColumn, csv) {
   groupBy(byColumn, csv) {
     let lines = {};
     csv.forEach(line => {
@@ -35,7 +28,6 @@ var chart = {
     return lines;
   },
 
-//indexOf: function (groupedBy, groupedSeries) {
   indexOf(groupedBy, groupedSeries) {
     let keys = Object.keys(groupedSeries);
     for (let i = 0; i < keys.length; i++) {
@@ -46,11 +38,8 @@ var chart = {
     return -1;
   },
 
-  /*
-   *
-   */
-//plot: function (groupedSeries, options, labels, hidden, annotations) {
   plot(groupedSeries, options, labels, hidden, annotations) {
+    let dataset = [];
     for (let groupedBy in groupedSeries) {
       if (groupedSeries[groupedBy].length > 0) {
         let index = this.indexOf(groupedBy, groupedSeries);
@@ -66,43 +55,57 @@ var chart = {
 //        shadowSize: 5,
 //        highlightColor: 'green'
         };
-        if (hidden[index]) {
-          this.hidden.push(data);
-        } else {
-          this.dataset.push(data);
-        }
+        dataset.push(data);
       }
     }
 
-    this.options = options;
-    let plot = $.plot($('#chart'), this.dataset, this.options);
+    options.legend = {
+      labelFormatter: function (label/*, series*/) {
+        return `<a href="javascript:void(0)" id="${label}" class="legendtoggle">${label}</a>`;
+      }
+    };
 
-    annotations.forEach(function (annotation) {
-      let p = plot.pointOffset({x: annotation.x, y: annotation.y});
-      $('#chart').append(`<div style="position:absolute;left:${p.left}px;top:${p.top}px">${annotation.text}</div>`);
+    this.plot = $.plot($('#chart'), dataset, options);
+
+    let self = this;
+    $('#chart').on('click', '.legendtoggle', function (event) {
+      self.toggle($(this).attr("id"));
     });
 
+    annotations.forEach(function (annotation) {
+      let p = this.plot.pointOffset({x: annotation.x, y: annotation.y});
+      $('#chart').append(`<div style="position:absolute;left:${p.left}px;top:${p.top}px">${annotation.text}</div>`);
+    });
   },
 
-//enable: function (flag, label) {
-  enable(flag, label) {
-    if (flag) {
-      let index = this.hidden.findIndex(data => data.label === label);
-      if (index > -1) {
-        let data = this.hidden.splice(index, 1);
-        this.dataset.push(data[0]);
-      }
-    } else {
-      let index = this.dataset.findIndex(data => data.label === label);
-      if (index > -1) {
-        let data = this.dataset.splice(index, 1);
-        this.hidden.push(data[0]);
-      }
+  toggle(label) {
+    let options = this.plot.getOptions();
+    let data = this.plot.getData();
+    let idx = data.findIndex(d => d.label === label);
+    if ('lines' in options && options.lines.show) {
+      data[idx].lines.show = !data[idx].lines.show;
+    } else if ('points' in options && options.points.show) {
+      data[idx].points.show = !data[idx].points.show;
+    } else if ('bars' in options && options.bars.show) {
+      data[idx].bars.show = !data[idx].bars.show;
     }
-    $.plot($("#chart"), this.dataset, this.options);
+    this.plot.setData(data);
+//  this.plot.setupGrid();
+    this.plot.draw();
+//    let index = this.hidden.findIndex(data => data.label === label);
+//    if (index > -1) {
+//      let data = this.hidden.splice(index, 1);
+//      this.dataset.push(data[0]);
+//    } else {
+//      index = this.dataset.findIndex(data => data.label === label);
+//      if (index > -1) {
+//        let data = this.dataset.splice(index, 1);
+//        this.hidden.push(data[0]);
+//      }
+//    }
+//    $.plot($('#chart'), this.dataset, this.options);
   },
 
-//minmax: function (series, options) {
   minmax(series, options) {
     if (series.length > 0) {
       // x-axis: find min and max values over all series
@@ -122,5 +125,4 @@ var chart = {
     }
     return options;
   }
-
 };

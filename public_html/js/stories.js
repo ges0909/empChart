@@ -26,7 +26,6 @@ story._1_1 = function (csv, xcolumn, ycolumn, keys, labels) {
       axisLabelPadding: 20
     },
     legend: {
-      hideable: true
     },
     grid: {
       hoverable: true,
@@ -38,6 +37,8 @@ story._1_1 = function (csv, xcolumn, ycolumn, keys, labels) {
       defaultTheme: false
     }
   };
+
+  csv = csv.filter(line => line['Typ'] !== 'Prognose');
 
   let series = {};
   let groups = this.groupBy('LagerID', csv);
@@ -85,7 +86,6 @@ story._1_4 = function (csv, xcolumn, ycolumn, keys, labels) {
       axisLabelPadding: 20
     },
     legend: {
-      // hideable 'legend' works only with line and point graphs
     },
     grid: {
       hoverable: true,
@@ -159,7 +159,6 @@ story._1_5 = function (csv, xcolumn, ycolumn, keys, labels) {
       axisLabelPadding: 20
     },
     legend: {
-      // hideable 'legend' works only with line and point graphs
     },
     grid: {
       hoverable: true,
@@ -233,7 +232,6 @@ story._1_6 = function (csv, xcolumn, ycolumn, keys, labels) {
       axisLabelPadding: 20
     },
     legend: {
-      // hideable 'legend' works only with line and point graphs
     },
     grid: {
       hoverable: true,
@@ -357,7 +355,6 @@ story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
       axisLabelPadding: 20
     },
     legend: {
-      hideable: true
     },
     grid: {
       hoverable: true,
@@ -421,8 +418,6 @@ story._2_2 = function (csv, xcolumn, ycolumn, keys, labels) {
     },
     legend: {
       position: "se"
-//      hideable: true,
-//      hidden: [labels[3]]
     },
     grid: {
       hoverable: true,
