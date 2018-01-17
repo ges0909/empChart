@@ -19,7 +19,6 @@
     "flot.tooltip": "https://github.com/krzysu/flot.tooltip/archive/master.tar.gz",
     "jquery": "~3.2.1",
     "jquery-csv": "~0.8.3",
-    "jquery-ui-dist": "^1.12.1",
     "jquery.flot": "~0.8.3",
     "lodash": "~4.17.4",
     "moment": "~2.20.1",

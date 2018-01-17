@@ -38,7 +38,7 @@ var chart = {
     return -1;
   },
 
-  plot(groupedSeries, options, labels, hidden, annotations) {
+  plot(groupedSeries, options, labels, annotations) {
     let dataset = [];
     for (let groupedBy in groupedSeries) {
       if (groupedSeries[groupedBy].length > 0) {

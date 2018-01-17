@@ -5,9 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="ext/jquery-ui.css" />
     <script src="ext/jquery.js"></script>
-    <script src="ext/jquery-ui.js"></script>
     <script src="ext/jquery.csv.js"></script>
     <script src="ext/jquery.flot.js"></script>
     <script src="ext/jquery.flot.time.js"></script>
@@ -27,21 +25,12 @@
           let csv = $.csv.toObjects(data, {
             separator: ';'
           });
-          chart = story._2_2(csv, 'tstamp', '',
-                  ["1_89312"],
-                  ["Lager 1"]);
-        });
-        $('input').checkboxradio().on('change', function () {
-          let checked = $(this).prop('checked');
-          chart.enable(checked, "Bereinigte IST Werte");
-          chart.enable(!checked, "IST Werte seit EE Maßname");
+          chart = story._2_2(csv, 'tstamp', '');
         });
       });
     </script>
   </head>
   <body>
-    <label for='checkbox-1'>Bereinigung</label>
-    <input type='checkbox' id='checkbox-1'>
     <div id='chart' style='width:inherit;height:80%'></div>
     <div id="footer">
       Copyright &copy; 2018 infinIT Services GmbH

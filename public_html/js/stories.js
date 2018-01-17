@@ -1,8 +1,6 @@
 var story = Object.create(chart);
 
-story._1_1 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false, false, false];
-
+story._1_1 = function (csv, xcolumn, ycolumn) {
   let options = {
     lines: {
       show: true
@@ -52,12 +50,10 @@ story._1_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   // right margin
   options.xaxis.max = moment(options.xaxis.max).add(1, "month").valueOf();
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, sites, []);
 };
 
-story._1_4 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false, false, false];
-
+story._1_4 = function (csv, xcolumn, ycolumn) {
   let options = {
     bars: {
       show: true,
@@ -126,12 +122,10 @@ story._1_4 = function (csv, xcolumn, ycolumn, keys, labels) {
     }
   ];
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, sites, []);
 };
 
-story._1_5 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false, false, false];
-
+story._1_5 = function (csv, xcolumn, ycolumn) {
   let options = {
     bars: {
       show: true,
@@ -200,12 +194,10 @@ story._1_5 = function (csv, xcolumn, ycolumn, keys, labels) {
     }
   ];
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, sites, []);
 };
 
-story._1_6 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false, false, false];
-
+story._1_6 = function (csv, xcolumn, ycolumn) {
   let options = {
     bars: {
       show: true,
@@ -274,12 +266,10 @@ story._1_6 = function (csv, xcolumn, ycolumn, keys, labels) {
     }
   ];
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, sites, []);
 };
 
-story._1_6_1 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false, false, false];
-
+story._1_6_1 = function (csv, xcolumn, ycolumn) {
   let options = {
     points: {
       show: true,
@@ -330,13 +320,11 @@ story._1_6_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   options.xaxis.min = moment(options.xaxis.min).subtract(2, "week").valueOf();
   options.xaxis.max = moment(options.xaxis.max).add(2, "week").valueOf();
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, sites, []);
 
 };
 
-story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
-  let hidden = [false, false, false];
-
+story._2_1 = function (csv, xcolumn, ycolumn) {
   let options = {
     lines: {
       show: true
@@ -373,7 +361,7 @@ story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   };
 
   let segments = {};
-  let changedLabels = [];
+  let labels = [];
   let groups = this.groupBy('Standort', csv);
   let sites = Object.keys(groups);
   let self = this;
@@ -381,7 +369,7 @@ story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
     let types = self.groupBy('Typ', groups[site]);
     for (let type in types) {
       segments[site + type] = self.extract(types[type], xcolumn, ycolumn, 'YYYY-MM-DD');
-      changedLabels.push(labels[index] + ' - ' + type)
+      labels.push(sites[index] + '/' + type)
     }
     let series = self.extract(groups[site], xcolumn, ycolumn, 'YYYY-MM-DD');
     options = self.minmax(series, options);
@@ -390,16 +378,15 @@ story._2_1 = function (csv, xcolumn, ycolumn, keys, labels) {
   // right margin
   options.xaxis.max = moment(options.xaxis.max).add(1, "month").valueOf();
 
-  this.plot(segments, options, changedLabels, hidden, []);
+  this.plot(segments, options, labels, []);
 };
 
-story._2_2 = function (csv, xcolumn, ycolumn, keys, labels) {
-  labels[0] = "IST Werte seit EE Maßname";
-  labels[1] = "Prognose auf historischen Daten";
-  labels[2] = "Planwert nach EE Maßnahme";
-  labels[3] = "Bereinigte IST Werte";
-
-  let hidden = [false, false, false, true];
+story._2_2 = function (csv, xcolumn, ycolumn) {
+  let labels = [
+    "IST Werte seit EE Maßname",
+    "Prognose auf historischen Daten",
+    "Planwert nach EE Maßnahme",
+    "Bereinigte IST Werte"];
 
   let options = {
     lines: {
@@ -444,7 +431,7 @@ story._2_2 = function (csv, xcolumn, ycolumn, keys, labels) {
   series['gasPredFac2Cum'] = this.extract(groups[sites[0]], xcolumn, 'gasPredFac2Cum', 'YYYY-MM-DD');
   series['gasPredFac3CutCum'] = this.extract(groups[sites[0]], xcolumn, 'gasPredFac3CutCum', 'YYYY-MM-DD');
 
-  this.plot(series, options, labels, hidden, []);
+  this.plot(series, options, labels, []);
 
   return this;
 };
