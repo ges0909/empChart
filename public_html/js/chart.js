@@ -1,6 +1,6 @@
 "use strict";
 
-var chart = {
+var Chart = {
 
   plot: null,
 
@@ -72,10 +72,20 @@ var chart = {
       self.toggle($(this).attr("id"));
     });
 
+    // axis labels
+    $("<div class='axisLabel xaxisLabel'></div>").text("X Label").appendTo($('#chart'));
+    $("<div class='axisLabel yaxisLabel'></div>").text("Y Label").appendTo($('#chart'));
+
+    // annotations
     annotations.forEach(function (annotation) {
       let p = this.plot.pointOffset({x: annotation.x, y: annotation.y});
       $('#chart').append(`<div style="position:absolute;left:${p.left}px;top:${p.top}px">${annotation.text}</div>`);
     });
+
+    // resize without plugin
+//    $(window).resize(function () {
+//      $.plot($('#chart'), dataset, options)
+//    });
   },
 
   toggle(label) {

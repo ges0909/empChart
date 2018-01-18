@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="css/chart.css" />
     <script src="js/chart.js"></script>
-    <script src="js/stories.js"></script>
+    <script src="js/story.js"></script>
 
     <script>
       $(document).ready(function () {
@@ -24,7 +24,8 @@
           let csv = $.csv.toObjects(data, {
             separator: ';'
           });
-          story._2_1(csv, 'tstamp', 'mix_gasCon');
+          let stories = Object.assign(Object.create(Chart), Story);
+          stories.story_2_1(csv, 'tstamp', 'mix_gasCon');
         });
       });
     </script>
