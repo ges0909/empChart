@@ -29,12 +29,14 @@
 		"html-loader": "~0.5.5",
 		"http-server": "~0.11.1",
 		"jshint": "~2.9.5",
+		"eslint": "~4.16.0",
 		"qunit": "~2.5.0",
 		"webpack": "^3.10.0"
 	},
 	"scripts": {
 		"prebuild": "del-cli public_html/ext -f",
 		"build": "webpack",
-    "server": "http-server public_html/ -p 9999"
+    "lint": "eslint public_html/js/**/*.js",
+    "start": "http-server public_html/ -p 9999"
 	}
 }

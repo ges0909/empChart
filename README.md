@@ -1,44 +1,29 @@
-# Node.js & npm
+# How to run?
 
-## global vs. local
+## Download and install "nodejs"
 
-- install globally if running from command line
-- globally is stored in C:\Program Files\nodejs\node_modules
-- install locally f access with require() is needed
-- locally is stored in ./node_modules/.bin/webpack
+1. Download [nodejs & npm](https://nodejs.org/en/download/) and install.
+3. Test installation with `node --version` resp. `npm --version` .
+4. Update package manager with `npm install --globally npm@latest`
 
-1. download from https://nodejs.org/en/download/
-2. node --version
-3. npm --version
-4. npm install --globally npm@latest
+## Download and install "yarn"
 
-# yarn & webpack
+1. Download [yarn](https://yarnpkg.com/en/docs/install) and install it.
+  `Yarn` is an alternative to the `npm` package manager.
+2. Test installation with `yarn --version`.
 
-- with '--save-dev' . '--dev'  package will appear in your 'devDependencies' of 'package.json'
+## Download and build project
 
-1. npm install --save-dev --globally yarn
-2. yarn add webpack --dev              # => npm install --save-dev webpack
-3. yarn add copy-webpack-plugin --dev  # => npm install --save-dev copy-webpack-plugin
+1. `git clone https://github.com/ges0909/empChart.git`
+2. `cd empChart/`
+3. `git checkout develop`
+4. `yarn`
+5. `npx eslint --init`
+6. `yarn run build`
+7. Provide data ...
+8. `yarn run start`
+9. Open in browser [http://localhost:9999/story_1_1.html] .
 
-- https://medium.com/netscape/bye-bye-bower-or-how-to-migrate-from-bower-to-npm-and-webpack-4eb2e1121a50
+## Miscellaneous
 
-# install project dependencies
-
-1. yarn
-2. npx webpack --config webpack.config.js
-
-# project setup
-
-1. mkdir `<project_dir>`
-2. cd `<project_dir>`
-3. npm init
-4. mkdir `src` # => main.js => `node src/main.js`
-
-# lodash
-
-1. yarn add lodash --dev
-
-# http-server
-
-1. npm install --globally http-server 
-2. http-server public_html -p 9999
+- `npx eslint --fix **/js/*.js`
