@@ -8,7 +8,7 @@ const Assets = require('./assets');
 module.exports = {
   entry: {
     // use relative pathes only
-    chart: './src/js.chart.js',
+    chart: './src/js/chart.js',
     story: './src/js/story.js'
     // story_1_1: './public_html/story_1_1.html',
     // story_1_4: './public_html/story_1_4.html',
@@ -32,6 +32,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
+        exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
           options: {
