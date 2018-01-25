@@ -39,6 +39,7 @@
 	"scripts": {
 		"prebuild": "del-cli dist -f",
 		"build": "webpack",
+		"prod": "webpack -p",
     "lint": "eslint public_html/js/**/*.js",
     "start": "http-server public_html/ -p 9999"
 	}

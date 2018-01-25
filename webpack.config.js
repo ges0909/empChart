@@ -6,10 +6,11 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Assets = require('./assets');
 
 module.exports = {
+  context: path.resolve(__dirname, 'src'), // __dirname refers to the directory where' webpack.config.js' lives
   entry: {
     // use relative pathes only
-    chart: './src/js/chart.js',
-    story: './src/js/story.js'
+    chart: './js/chart.js',
+    story: './js/story.js'
     // story_1_1: './public_html/story_1_1.html',
     // story_1_4: './public_html/story_1_4.html',
     // story_1_5: './public_html/story_1_5.html',
@@ -19,7 +20,7 @@ module.exports = {
     // story_2_2: './public_html/story_2_1.html'
   },
   output: {
-    path: __dirname + '/dist/',
+    path: path.resolve(__dirname, 'dist'),
     filename: '[name].bundle.js'
   },
   module: {
@@ -47,7 +48,7 @@ module.exports = {
       Assets.map(asset => {
         return {
           from: path.resolve(__dirname, `./node_modules/${asset}`),
-          to: path.resolve(__dirname, './dist/ext')
+          to: path.resolve(__dirname, 'dist/ext')
         };
       })
     )
