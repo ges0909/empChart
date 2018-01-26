@@ -11,13 +11,13 @@ module.exports = {
     // use relative pathes only
     chart: './js/chart.js',
     story: './js/story.js'
-    // story_1_1: './public_html/story_1_1.html',
-    // story_1_4: './public_html/story_1_4.html',
-    // story_1_5: './public_html/story_1_5.html',
-    // story_1_6: './public_html/story_1_6.html',
-    // story_1_6_1: './public_html/story_1_6_1.html',
-    // story_2_1: './public_html/story_2_1.html',
-    // story_2_2: './public_html/story_2_1.html'
+    // story_1_1: './story_1_1.html',
+    // story_1_4: './story_1_4.html',
+    // story_1_5: './story_1_5.html',
+    // story_1_6: './story_1_6.html',
+    // story_1_6_1: './story_1_6_1.html',
+    // story_2_1: './story_2_1.html',
+    // story_2_2: './story_2_1.html'
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -26,13 +26,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/,
+        test: /\.html$/i,
         use: {
           loader: 'html-loader'
         }
       },
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
