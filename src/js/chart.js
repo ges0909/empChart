@@ -1,7 +1,10 @@
+// @ts-check
 'use strict';
 
 import moment from 'moment';
 import $ from 'jquery';
+
+import '../css/chart.css';
 
 var Chart = {
 

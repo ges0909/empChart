@@ -26,13 +26,13 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.html$/i,
+        test: /\.html$/,
         use: {
           loader: 'html-loader'
         }
       },
       {
-        test: /\.js$/i,
+        test: /\.js$/,
         exclude: /node_modules/,
         use: {
           loader: 'babel-loader',
@@ -40,6 +40,11 @@ module.exports = {
             presets: ['babel-preset-env']
           }
         }
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use:  ['style-loader', 'css-loader']
       }
     ]
   },

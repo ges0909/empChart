@@ -34,3 +34,4 @@
 ## Miscellaneous
 
 - `npx eslint --fix **/js/*.js`
+- `webpack -p` # minifies assets

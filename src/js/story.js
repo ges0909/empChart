@@ -1,6 +1,9 @@
+// @ts-check
 'use strict';
 
 import moment from 'moment';
+
+import Chart from './chart.js';
 
 var Story = {
 

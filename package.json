@@ -27,20 +27,21 @@
 		"copy-webpack-plugin": "^4.3.1",
 		"del-cli": "~1.1.0",
 		"html-loader": "~0.5.5",
-		"http-server": "~0.11.1",
-		"jshint": "~2.9.5",
 		"eslint": "~4.16.0",
 		"qunit": "~2.5.0",
 		"webpack": "^3.10.0",
+		"webpack-dev-server": "2.11.1",
 		"babel-loader": "~7.1.2",
 		"babel-core": "~6.26.0",
-		"babel-preset-env": "~1.6.1"
+		"babel-preset-env": "~1.6.1",
+		"css-loader": "0.28.9",
+		"style-loader": "0.19.1"
 	},
 	"scripts": {
 		"prebuild": "del-cli dist -f",
 		"build": "webpack",
 		"prod": "webpack -p",
     "lint": "eslint public_html/js/**/*.js",
-    "start": "http-server public_html/ -p 9999"
+		"start": "webpack-dev-server --inline"
 	}
 }
